@@ -1,6 +1,7 @@
 import MainSlider from "./MainSlider";
 import PopularProducts from "../components/PopularProducts";
 import FlowerRecommender from "../components/FlowerRecommender";
+import Footer from "../layout/Footer";
 
 export default function Home() {
   return (

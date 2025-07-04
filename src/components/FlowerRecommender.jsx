@@ -32,11 +32,11 @@ export default function FlowerRecommender() {
           value={form.size}
           onChange={handleChange}
           placeholder="예:24평"
-          className="w-full border rounded px-3 py-2"
+          className="w-full border rounded px-3 py-2 shadow-lg"
         />
       </div>
       <div>
-        <label className="block test-sm font-medium mb-1">
+        <label className="block test-sm font-medium mb-1 ">
           방향(남향/북향 등)
         </label>
         <select
@@ -44,7 +44,7 @@ export default function FlowerRecommender() {
           vlaue={form.direction}
           onChange={handleChange}
           placeholder="예:남향"
-          className="w-full border rounded px-3 py-2"
+          className="w-full border rounded px-3 py-2 shadow-lg"
         >
           <option value="">선택하세요</option>
           <option value="동향">동향</option>
@@ -60,7 +60,7 @@ export default function FlowerRecommender() {
           name="sunlight"
           value={form.sunlight}
           onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border rounded px-3 py-2 shadow-lg"
         >
           <option value="">선택하세요</option>
           <option value="많음">많음</option>
@@ -74,7 +74,7 @@ export default function FlowerRecommender() {
           name="pet"
           value={form.pet}
           onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border rounded px-3 py-2 shadow-lg"
         >
           <option value="">선택하세요</option>
           <option value="있음">있음</option>
@@ -91,7 +91,7 @@ export default function FlowerRecommender() {
           name="image"
           accpet="image/*"
           onChange={handleChange}
-          className="w-full"
+          className="w-full "
         />
       </div>
 
