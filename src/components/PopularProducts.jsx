@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const popularProducts = [
   {
@@ -47,6 +48,7 @@ const popularProducts = [
 
 export default function PopularProducts() {
   const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
   const itemsperPage = 3;
 
   const maxIndex = Math.ceil(popularProducts.length / itemsperPage) - 1;
@@ -64,6 +66,10 @@ export default function PopularProducts() {
     startIndex,
     startIndex + itemsperPage
   );
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
 
   useEffect(() => {
     console.log(current);
@@ -117,7 +123,8 @@ export default function PopularProducts() {
         {visibleProducts.map((product) => (
           <div
             key={product.id}
-            className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2"
+            className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 cursor-pointer"
+            onClick={() => handleProductClick(product.id)}
           >
             {/* 이미지 컨테이너 */}
             <div className="relative overflow-hidden">
@@ -145,8 +152,14 @@ export default function PopularProducts() {
                 {product.price}
               </p>
 
-              {/* 구매 버튼 */}
-              <button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 px-4 rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              {/* 장바구니 버튼 */}
+              <button
+                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 px-4 rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // 장바구니 로직 추가 예정
+                }}
+              >
                 장바구니에 담기
               </button>
             </div>

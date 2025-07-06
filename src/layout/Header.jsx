@@ -138,10 +138,10 @@ export default function Header() {
               </svg>
             </button>
 
-            {/* 장바구니 */}
+            {/* 카트 */}
             <Link
               to="/cart"
-              aria-label="장바구니"
+              aria-label="카트"
               className="relative p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300 group"
             >
               <svg
@@ -154,10 +154,10 @@ export default function Header() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
-              {/* 장바구니 아이템 수 표시 */}
+              {/* 카트 아이템 수 표시 */}
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                 0
               </span>
