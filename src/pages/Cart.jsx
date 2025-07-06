@@ -1,75 +1,49 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import OrderForm from "../components/OrderForm";
+import { useCart } from "../context/CartContext.jsx";
 
 export default function Cart() {
-  // 장바구니 상태 (실제로는 전역 상태 관리나 Context를 사용할 수 있습니다)
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "라벤더",
-      price: 15000,
-      quantity: 2,
-      image: "/products/lavender.jpg",
-      category: "야생화",
-    },
-    {
-      id: 2,
-      name: "프리지아",
-      price: 12000,
-      quantity: 1,
-      image: "/products/freesia.jpg",
-      category: "야생화",
-    },
-    {
-      id: 3,
-      name: "리시안서스",
-      price: 18000,
-      quantity: 3,
-      image: "/products/lisianthus.jpg",
-      category: "야생화",
-    },
-  ]);
+  const {
+    items: cartItems,
+    updateQuantity,
+    removeFromCart,
+    getCartTotal,
+    clearCart,
+  } = useCart();
 
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
 
   // 수량 증가
   const increaseQuantity = (id) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+    const item = cartItems.find((item) => item.id === id);
+    if (item) {
+      updateQuantity(id, item.quantity + 1);
+    }
   };
 
   // 수량 감소
   const decreaseQuantity = (id) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
+    const item = cartItems.find((item) => item.id === id);
+    if (item && item.quantity > 1) {
+      updateQuantity(id, item.quantity - 1);
+    }
   };
 
   // 상품 삭제
   const removeItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    removeFromCart(id);
   };
 
   // 총 금액 계산
-  const totalAmount = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const totalAmount = getCartTotal();
 
   // 주문 완료 처리
   const handleOrderComplete = () => {
     setOrderComplete(true);
     setShowOrderForm(false);
-    setCartItems([]); // 장바구니 비우기
+    clearCart(); // 장바구니 비우기
   };
 
   // 주문 완료 화면

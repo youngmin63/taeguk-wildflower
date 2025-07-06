@@ -1,54 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext.jsx";
 
 const popularProducts = [
   {
     id: 1,
-    name: "화이트 튤립 부케",
-    price: "18,000원",
-    image: "/products/tulip.jpg",
-    category: "튤립",
+    name: "사계넝쿨장미",
+    price: "25,000원",
+    image: "/products/converted/climbing-rose.png",
+    category: "야생화",
   },
   {
     id: 2,
-    name: "안개꽃 믹스",
-    price: "15,000원",
-    image: "/products/babysbreath.jpg",
-    category: "안개꽃",
+    name: "수국",
+    price: "18,000원",
+    image: "/products/converted/hydrangea.png",
+    category: "야생화",
   },
   {
     id: 3,
-    name: "핑크 장미 박스",
+    name: "유럽목수국",
     price: "22,000원",
-    image: "/products/rosebox.jpg",
-    category: "장미",
+    image: "/products/converted/european-hydrangea2.png",
+    category: "야생화",
   },
   {
     id: 4,
-    name: "노란 프리지아",
-    price: "17,000원",
-    image: "/products/freesia.jpg",
-    category: "프리지아",
+    name: "외목대목수국",
+    price: "28,000원",
+    image: "/products/converted/tree-hydrangea.png",
+    category: "야생화",
   },
   {
     id: 5,
-    name: "라벤더 드라이 플라워",
-    price: "19,000원",
-    image: "/products/lavender.jpg",
-    category: "라벤더",
+    name: "꼭지윤노리꽃나무",
+    price: "35,000원",
+    image: "/products/converted/cornus-kousa.png",
+    category: "유실수",
   },
   {
     id: 6,
-    name: "리시안셔스 믹스",
-    price: "20,000원",
-    image: "/products/lisianthus.jpg",
-    category: "리시안셔스",
+    name: "매자나무",
+    price: "32,000원",
+    image: "/products/converted/barberry.png",
+    category: "조경수",
+  },
+  {
+    id: 7,
+    name: "황금조팝",
+    price: "38,000원",
+    image: "/products/converted/golden-spirea.png",
+    category: "조경수",
   },
 ];
 
 export default function PopularProducts() {
   const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
+  const { addToCart, isInCart } = useCart();
   const itemsperPage = 3;
 
   const maxIndex = Math.ceil(popularProducts.length / itemsperPage) - 1;
@@ -154,13 +163,20 @@ export default function PopularProducts() {
 
               {/* 장바구니 버튼 */}
               <button
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-3 px-4 rounded-xl hover:from-green-600 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className={`w-full font-semibold py-3 px-4 rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl ${
+                  isInCart(product.id)
+                    ? "bg-gray-500 text-white cursor-not-allowed"
+                    : "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700"
+                }`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  // 장바구니 로직 추가 예정
+                  if (!isInCart(product.id)) {
+                    addToCart(product);
+                  }
                 }}
+                disabled={isInCart(product.id)}
               >
-                장바구니에 담기
+                {isInCart(product.id) ? "이미 담긴 상품" : "장바구니에 담기"}
               </button>
             </div>
           </div>

@@ -1,13 +1,31 @@
 import Footer from "./layout/Footer.jsx";
 import Header from "./layout/Header.jsx";
 import AppRouter from "./AppRouter.jsx";
+import { CartProvider, useCart } from "./context/CartContext.jsx";
+import Toast from "./components/Toast.jsx";
 
-export default function App() {
+function AppContent() {
+  const { toast, hideToast } = useCart();
+
   return (
     <>
       <Header />
       <AppRouter />
       <Footer />
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.isVisible}
+        onClose={hideToast}
+      />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <CartProvider>
+      <AppContent />
+    </CartProvider>
   );
 }
