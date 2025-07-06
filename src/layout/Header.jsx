@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useCart } from "../context/CartContext.jsx";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getCartItemCount } = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100">
@@ -52,7 +54,7 @@ export default function Header() {
               <span>야생화</span>
             </Link>
             <Link
-              to="/products?category=조경수"
+              to="/products?category=유실수"
               className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
             >
               <svg
@@ -71,7 +73,7 @@ export default function Header() {
               <span>유실수</span>
             </Link>
             <Link
-              to="/products?category=정원수"
+              to="/products?category=조경수"
               className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
             >
               <svg
@@ -159,7 +161,7 @@ export default function Header() {
               </svg>
               {/* 카트 아이템 수 표시 */}
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                0
+                {getCartItemCount()}
               </span>
             </Link>
 
@@ -210,7 +212,7 @@ export default function Header() {
                 <span>야생화</span>
               </Link>
               <Link
-                to="/products?category=조경수"
+                to="/products?category=유실수"
                 className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -227,10 +229,10 @@ export default function Header() {
                     d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
                   />
                 </svg>
-                <span>조경수</span>
+                <span>유실수</span>
               </Link>
               <Link
-                to="/products?category=정원수"
+                to="/products?category=조경수"
                 className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -253,7 +255,7 @@ export default function Header() {
                     d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z"
                   />
                 </svg>
-                <span>정원수</span>
+                <span>조경수</span>
               </Link>
               <Link
                 to="/inquiry"

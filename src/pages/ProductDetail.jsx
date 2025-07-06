@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext.jsx";
 
 const productData = [
   {
@@ -67,6 +68,8 @@ const productData = [
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToCart, isInCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
 
   const product = productData.find((p) => p.id === parseInt(id));
 
@@ -123,11 +126,46 @@ function ProductDetail() {
               </div>
 
               <div className="space-y-4">
+                {/* 수량 선택 */}
+                <div className="flex items-center justify-between bg-gray-50 p-4 rounded-xl">
+                  <span className="font-medium text-gray-700">수량</span>
+                  <div className="flex items-center space-x-3">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
+                    >
+                      -
+                    </button>
+                    <span className="w-12 text-center font-medium">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
                 <button className="w-full bg-green-500 text-white py-4 px-6 rounded-xl hover:bg-green-600 transition-colors duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                   구매하기
                 </button>
-                <button className="w-full border-2 border-green-500 text-green-500 py-3 px-6 rounded-xl hover:bg-green-50 transition-colors duration-200 font-medium">
-                  장바구니 담기
+
+                <button
+                  className={`w-full py-3 px-6 rounded-xl font-medium transition-colors duration-200 ${
+                    isInCart(product.id)
+                      ? "bg-gray-500 text-white cursor-not-allowed"
+                      : "border-2 border-green-500 text-green-500 hover:bg-green-50"
+                  }`}
+                  onClick={() => {
+                    if (!isInCart(product.id)) {
+                      addToCart(product, quantity);
+                    }
+                  }}
+                  disabled={isInCart(product.id)}
+                >
+                  {isInCart(product.id) ? "이미 담긴 상품" : "장바구니 담기"}
                 </button>
               </div>
             </div>
