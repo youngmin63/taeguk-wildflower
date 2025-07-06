@@ -29,7 +29,7 @@ export default function MainSlider() {
   };
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto aspect-[16/9] overflow-hidden rounded-3xl shadow-2xl">
+    <div className="relative w-full max-w-6xl mx-auto aspect-[16/7] overflow-hidden rounded-3xl shadow-2xl">
       {/* 슬라이드 이미지들 */}
       {images.map((img, idx) => (
         <div
@@ -105,9 +105,7 @@ export default function MainSlider() {
       {/* 슬라이드 콘텐츠 */}
       <div className="absolute bottom-8 left-8 right-8 z-10">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-md">
-          <h2 className="text-3xl font-bold text-white mb-2">
-            태국의 이야기
-          </h2>
+          <h2 className="text-3xl font-bold text-white mb-2">태국의 이야기</h2>
           <p className="text-white/90 text-lg">
             자연의 아름다움을 당신의 공간에
           </p>
