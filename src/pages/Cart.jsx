@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import OrderForm from "../components/OrderForm";
-import { useCart } from "../context/CartContext.jsx";
+import { useCart } from "../context/useCart.js";
 
 export default function Cart() {
   const {
@@ -148,7 +148,14 @@ export default function Cart() {
                       </h3>
                       <p className="text-sm text-gray-500">{item.category}</p>
                       <p className="text-lg font-semibold text-green-600 mt-1">
-                        {item.price.toLocaleString()}원
+                        {(() => {
+                          const price =
+                            typeof item.price === "string"
+                              ? parseInt(item.price.replace(/[^\d]/g, ""))
+                              : item.price;
+                          return price.toLocaleString();
+                        })()}
+                        원
                       </p>
                     </div>
 
@@ -175,7 +182,14 @@ export default function Cart() {
                     {/* 상품별 총액 */}
                     <div className="text-right">
                       <p className="text-lg font-semibold text-gray-900">
-                        {(item.price * item.quantity).toLocaleString()}원
+                        {(() => {
+                          const price =
+                            typeof item.price === "string"
+                              ? parseInt(item.price.replace(/[^\d]/g, ""))
+                              : item.price;
+                          return (price * item.quantity).toLocaleString();
+                        })()}
+                        원
                       </p>
                     </div>
 

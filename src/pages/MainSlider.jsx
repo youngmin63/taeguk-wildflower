@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-const images = [
-  "/slider/slider1.png",
-  "/slider/slider2.png",
-  "/slider/slider3.png",
-];
+// 반복문을 사용해서 activity 이미지 배열 생성
+const images = Array.from(
+  { length: 8 },
+  (_, index) => `/slider/activity${index + 1}.png`
+);
 
 export default function MainSlider() {
   const [current, setCurrent] = useState(0);
@@ -12,7 +12,7 @@ export default function MainSlider() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 5000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -105,10 +105,8 @@ export default function MainSlider() {
       {/* 슬라이드 콘텐츠 */}
       <div className="absolute bottom-8 left-8 right-8 z-10">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-md">
-          <h2 className="text-3xl font-bold text-white mb-2">태국의 이야기</h2>
-          <p className="text-white/90 text-lg">
-            자연의 아름다움을 당신의 공간에
-          </p>
+          <h2 className="text-3xl font-bold text-white mb-2">태국의 활동 </h2>
+          <p className="text-white/90 text-lg">꽃과 함께하는 특별한 순간들</p>
         </div>
       </div>
     </div>

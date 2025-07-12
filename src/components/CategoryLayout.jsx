@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext.jsx";
+import { useCart } from "../context/useCart.js";
 
 export default function CategoryLayout() {
   const [searchParams] = useSearchParams();

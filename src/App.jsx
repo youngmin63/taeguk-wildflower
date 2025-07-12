@@ -1,7 +1,8 @@
 import Footer from "./layout/Footer.jsx";
 import Header from "./layout/Header.jsx";
 import AppRouter from "./AppRouter.jsx";
-import { CartProvider, useCart } from "./context/CartContext.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
+import { useCart } from "./context/useCart.js";
 import Toast from "./components/Toast.jsx";
 
 function AppContent() {
