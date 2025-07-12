@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail.jsx";
 import CategoryLayout from "./components/CategoryLayout";
+import Contact from "./pages/Contact";
 
 export default function AppRouter() {
   return (
@@ -11,6 +12,7 @@ export default function AppRouter() {
       <Route path="/products" element={<CategoryLayout />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 }

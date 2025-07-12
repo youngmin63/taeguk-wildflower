@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 // 장바구니 상태 타입 정의
 const CartContext = createContext();
@@ -17,7 +17,7 @@ const CART_ACTIONS = {
 // 리듀서 함수
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case CART_ACTIONS.ADD_ITEM:
+    case CART_ACTIONS.ADD_ITEM: {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
@@ -45,6 +45,7 @@ const cartReducer = (state, action) => {
           ],
         };
       }
+    }
 
     case CART_ACTIONS.REMOVE_ITEM:
       return {
@@ -80,8 +81,8 @@ const cartReducer = (state, action) => {
         toast: {
           isVisible: true,
           message: action.payload.message,
-          type: action.payload.type || 'success'
-        }
+          type: action.payload.type || "success",
+        },
       };
 
     case CART_ACTIONS.HIDE_TOAST:
@@ -89,8 +90,8 @@ const cartReducer = (state, action) => {
         ...state,
         toast: {
           ...state.toast,
-          isVisible: false
-        }
+          isVisible: false,
+        },
       };
 
     default:
@@ -103,9 +104,9 @@ const initialState = {
   items: [],
   toast: {
     isVisible: false,
-    message: '',
-    type: 'success'
-  }
+    message: "",
+    type: "success",
+  },
 };
 
 // CartProvider 컴포넌트
@@ -136,14 +137,14 @@ export const CartProvider = ({ children }) => {
       type: CART_ACTIONS.ADD_ITEM,
       payload: { ...product, quantity },
     });
-    
+
     // 토스트 메시지 표시
     dispatch({
       type: CART_ACTIONS.SHOW_TOAST,
       payload: {
         message: `${product.name}이(가) 장바구니에 추가되었습니다.`,
-        type: 'success'
-      }
+        type: "success",
+      },
     });
   };
 
@@ -210,11 +211,5 @@ export const CartProvider = ({ children }) => {
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
-// 커스텀 훅
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
-};
+// CartContext만 export
+export { CartContext };
