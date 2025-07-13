@@ -1,5 +1,6 @@
 import Footer from "./layout/Footer.jsx";
 import Header from "./layout/Header.jsx";
+import TopHeader from "./layout/TopHeader.jsx";
 import AppRouter from "./AppRouter.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import { useCart } from "./context/useCart.js";
@@ -10,6 +11,7 @@ function AppContent() {
 
   return (
     <>
+      <TopHeader />
       <Header />
       <AppRouter />
       <Footer />

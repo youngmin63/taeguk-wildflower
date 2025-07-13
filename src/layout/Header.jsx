@@ -1,27 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useCart } from "../context/useCart";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { getCartItemCount } = useCart();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* 로고 */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-700 bg-clip-text text-transparent tracking-tight">
-              태국 야생화
-            </span>
-          </Link>
-
+    <header className="bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14">
           {/* 데스크톱 메뉴 */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               to="/products?category=야생화"
-              className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
+              className="flex items-center space-x-2 px-2 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
             >
               <svg
                 className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
@@ -40,7 +31,7 @@ export default function Header() {
             </Link>
             <Link
               to="/products?category=유실수"
-              className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
+              className="flex items-center space-x-2 px-2 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
             >
               <svg
                 className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
@@ -59,7 +50,7 @@ export default function Header() {
             </Link>
             <Link
               to="/products?category=조경수"
-              className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
+              className="flex items-center space-x-2 px-2 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
             >
               <svg
                 className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
@@ -84,7 +75,7 @@ export default function Header() {
             </Link>
             <Link
               to="/contact"
-              className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
+              className="flex items-center space-x-2 px-2 py-2 text-gray-700 hover:text-green-600 font-medium transition-all duration-300 hover:bg-green-50 rounded-xl group"
             >
               <svg
                 className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
@@ -103,36 +94,14 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* 우측 아이콘들 */}
-          <div className="flex items-center space-x-4">
-            {/* 검색 버튼 */}
-            <button
-              aria-label="검색"
-              className="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300 group"
-            >
-              <svg
-                className="w-6 h-6 group-hover:scale-110 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-
-            {/* 카트 */}
+          {/* 로그인/회원가입 버튼들 */}
+          <div className="hidden md:flex items-center space-x-3">
             <Link
-              to="/cart"
-              aria-label="카트"
-              className="relative p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300 group"
+              to="/login"
+              className="flex items-center space-x-1 px-3 py-1.5 text-sm text-green-600 hover:text-green-700 font-medium border border-green-600 hover:border-green-700 rounded-md transition-all duration-300"
             >
               <svg
-                className="w-6 h-6 group-hover:scale-110 transition-transform duration-300"
+                className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -141,22 +110,17 @@ export default function Header() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                 />
               </svg>
-              {/* 카트 아이템 수 표시 */}
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                {getCartItemCount()}
-              </span>
+              <span>로그인</span>
             </Link>
-
-            {/* 모바일 메뉴 버튼 */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300"
+            <Link
+              to="/signup"
+              className="flex items-center space-x-1 px-3 py-1.5 text-sm bg-gradient-to-r from-green-600 to-emerald-700 text-white font-medium rounded-md hover:from-green-700 hover:to-emerald-800 transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <svg
-                className="w-6 h-6"
+                className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -165,11 +129,32 @@ export default function Header() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
+                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
                 />
               </svg>
-            </button>
+              <span>회원가입</span>
+            </Link>
           </div>
+
+          {/* 모바일 메뉴 버튼 */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
         </div>
 
         {/* 모바일 메뉴 */}
@@ -261,6 +246,66 @@ export default function Header() {
                   />
                 </svg>
                 <span>문의하기</span>
+              </Link>
+              <Link
+                to="/login"
+                className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                  />
+                </svg>
+                <span>로그인</span>
+              </Link>
+              <Link
+                to="/signup"
+                className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                  />
+                </svg>
+                <span>회원가입</span>
+              </Link>
+              <Link
+                to="/mypage"
+                className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+                <span>마이페이지</span>
               </Link>
             </div>
           </div>
