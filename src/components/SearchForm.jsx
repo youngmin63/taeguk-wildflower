@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const categories = [
   { id: "all", name: "전체" },
@@ -22,12 +24,12 @@ export default function SearchForm() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPriceRange, setSelectedPriceRange] = useState("all");
   const [isExpanded, setIsExpanded] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSearch = (e) => {
     e.preventDefault();
     const searchParams = new URLSearchParams();
-    
+
     if (searchTerm.trim()) {
       searchParams.append("q", searchTerm.trim());
     }
@@ -37,9 +39,9 @@ export default function SearchForm() {
     if (selectedPriceRange !== "all") {
       searchParams.append("price", selectedPriceRange);
     }
-    
+
     const queryString = searchParams.toString();
-    navigate(`/products?${queryString}`);
+          router.push(`/products?${queryString}`);
   };
 
   const handleClear = () => {
@@ -66,12 +68,8 @@ export default function SearchForm() {
             />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          꽃 검색하기
-        </h2>
-        <p className="text-gray-600">
-          원하시는 꽃을 쉽고 빠르게 찾아보세요
-        </p>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">꽃 검색하기</h2>
+        <p className="text-gray-600">원하시는 꽃을 쉽고 빠르게 찾아보세요</p>
       </div>
 
       <form onSubmit={handleSearch} className="space-y-4">
@@ -189,7 +187,7 @@ export default function SearchForm() {
             </svg>
             검색하기
           </button>
-          
+
           <button
             type="button"
             onClick={handleClear}
@@ -204,18 +202,20 @@ export default function SearchForm() {
       <div className="mt-6">
         <p className="text-sm text-gray-600 mb-3">빠른 검색:</p>
         <div className="flex flex-wrap gap-2">
-          {["장미", "수국", "튤립", "라벤더", "프리지아", "리시안서스"].map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => setSearchTerm(tag)}
-              className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full hover:bg-blue-200 transition-colors duration-300"
-            >
-              {tag}
-            </button>
-          ))}
+          {["장미", "수국", "튤립", "라벤더", "프리지아", "리시안서스"].map(
+            (tag) => (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => setSearchTerm(tag)}
+                className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full hover:bg-blue-200 transition-colors duration-300"
+              >
+                {tag}
+              </button>
+            )
+          )}
         </div>
       </div>
     </div>
   );
-} 
+}

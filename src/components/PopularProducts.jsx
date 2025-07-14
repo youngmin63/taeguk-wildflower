@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useCart } from "../context/useCart.js";
+import { useRouter } from "next/navigation";
+import { useCart } from "@/context/useCart";
 
 const popularProducts = [
   {
@@ -56,7 +58,7 @@ const popularProducts = [
 
 export default function PopularProducts() {
   const [current, setCurrent] = useState(0);
-  const navigate = useNavigate();
+  const router = useRouter();
   const { addToCart, isInCart } = useCart();
   const itemsperPage = 3;
 
@@ -77,7 +79,7 @@ export default function PopularProducts() {
   );
 
   const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
+    router.push(`/product/${productId}`);
   };
 
   useEffect(() => {

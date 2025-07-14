@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useReducer, useEffect } from "react";
 
 // 장바구니 상태 타입 정의

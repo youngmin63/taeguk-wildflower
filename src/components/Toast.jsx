@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
+"use client";
 
-export default function Toast({
-  message,
-  type = "success",
-  isVisible,
-  onClose,
-}) {
+import { useState, useEffect } from "react";
+import { useCart } from "@/context/useCart";
+
+export default function Toast() {
+  const { toast, hideToast } = useCart();
+
   useEffect(() => {
-    if (isVisible) {
+    if (toast.isVisible) {
       const timer = setTimeout(() => {
-        onClose();
+        hideToast();
       }, 3000);
 
       return () => clearTimeout(timer);
     }
-  }, [isVisible, onClose]);
+  }, [toast.isVisible, hideToast]);
 
-  if (!isVisible) return null;
+  if (!toast.isVisible) return null;
 
-  const bgColor = type === "success" ? "bg-green-500" : "bg-red-500";
+  const bgColor = toast.type === "success" ? "bg-green-500" : "bg-red-500";
   const icon =
-    type === "success" ? (
+    toast.type === "success" ? (
       <svg
         className="w-5 h-5"
         fill="none"
@@ -57,10 +57,10 @@ export default function Toast({
       >
         <div className="flex-shrink-0">{icon}</div>
         <div className="flex-1">
-          <p className="text-sm font-medium">{message}</p>
+          <p className="text-sm font-medium">{toast.message}</p>
         </div>
         <button
-          onClick={onClose}
+          onClick={hideToast}
           className="flex-shrink-0 text-white hover:text-gray-200 transition-colors"
         >
           <svg

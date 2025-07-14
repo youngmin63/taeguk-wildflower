@@ -1,10 +1,12 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useCart } from "../context/useCart.js";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useCart } from "@/context/useCart";
 
 export default function CategoryLayout() {
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const category = searchParams.get("category");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -185,7 +187,7 @@ export default function CategoryLayout() {
               올바른 카테고리를 선택해주세요.
             </p>
             <Link
-              to="/"
+              href="/"
               className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition-colors duration-300"
             >
               홈으로 돌아가기
@@ -238,7 +240,7 @@ export default function CategoryLayout() {
           {/* 카테고리 네비게이션 */}
           <div className="flex items-center space-x-2">
             <Link
-              to="/products?category=야생화"
+              href="/products?category=야생화"
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${
                 category === "야생화"
                   ? "bg-green-600 text-white"
@@ -248,7 +250,7 @@ export default function CategoryLayout() {
               야생화
             </Link>
             <Link
-              to="/products?category=유실수"
+              href="/products?category=유실수"
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${
                 category === "유실수"
                   ? "bg-green-600 text-white"
@@ -258,7 +260,7 @@ export default function CategoryLayout() {
               유실수
             </Link>
             <Link
-              to="/products?category=조경수"
+              href="/products?category=조경수"
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${
                 category === "조경수"
                   ? "bg-green-600 text-white"
@@ -275,7 +277,7 @@ export default function CategoryLayout() {
           {products.map((product) => (
             <Link
               key={product.id}
-              to={`/product/${product.id}`}
+              href={`/product/${product.id}`}
               className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group block"
             >
               {/* 상품 이미지 */}
