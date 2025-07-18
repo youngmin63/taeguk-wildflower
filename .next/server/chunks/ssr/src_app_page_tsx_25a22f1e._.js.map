@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/youngminkwon/Desktop/taeguk-wildflower/src/app/page.tsx"],"sourcesContent":["\"use client\";\n\nexport default function Home() {\n  return (\n    <div className=\"min-h-screen bg-gray-50 flex items-center justify-center\">\n      <div className=\"text-center\">\n        <h1 className=\"text-4xl font-bold text-gray-900 mb-4\">\n          태극야생화 Next.js\n        </h1>\n        <p className=\"text-xl text-gray-600\">\n          Next.js로 성공적으로 마이그레이션되었습니다!\n        </p>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;AAAA;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBACb,cAAA,8OAAC;YAAI,WAAU;;8BACb,8OAAC;oBAAG,WAAU;8BAAwC;;;;;;8BAGtD,8OAAC;oBAAE,WAAU;8BAAwB;;;;;;;;;;;;;;;;;AAM7C","debugId":null}}]
+}
